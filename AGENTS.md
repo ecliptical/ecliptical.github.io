@@ -36,11 +36,13 @@ This repository contains the official company website for **Ecliptical Software 
 ## Repository Structure
 ```
 /
-├── index.html              # Main landing page
-├── ecliptical-md.png       # Company logo (180x180)
-├── favicon.ico             # Site favicon
-├── designrush-new-logo.svg # DesignRush partner logo
-└── AGENTS.md              # This file
+├── docs/                   # Public website assets (GitHub Pages root)
+│   ├── index.html          # Main landing page
+│   ├── ecliptical-md.png   # Company logo (180x180)
+│   ├── favicon.ico         # Site favicon
+│   └── designrush-new-logo.svg # DesignRush partner logo
+├── AGENTS.md               # This file
+└── README.md               # Repository documentation
 ```
 
 ## Technology Stack
@@ -60,7 +62,7 @@ To deploy changes to the website:
 2. **Push to GitHub** - The site is immediately available at https://ecliptical.github.io via GitHub Pages
 3. **Sync to S3 bucket**:
    ```bash
-   aws s3 sync . s3://www.eclipticalsoftware.com/ --exclude ".git/*" --exclude "AGENTS.md"
+   aws s3 sync docs/ s3://www.eclipticalsoftware.com/
    ```
 4. **Invalidate CloudFront cache**:
    ```bash
@@ -88,8 +90,8 @@ To deploy changes to the website:
 ## Working with AI Agents
 When collaborating with AI agents on this website:
 
-1. **Content Changes**: Update [index.html](index.html) for text, layout, or structural changes
-2. **Assets**: Add new images or assets to the root directory
+1. **Content Changes**: Update [docs/index.html](docs/index.html) for text, layout, or structural changes
+2. **Assets**: Add new images or assets to the `docs/` directory
 3. **Testing**: Test locally before deploying to S3
 4. **Deployment**: Always invalidate CloudFront cache after S3 sync to ensure changes are visible
 5. **Domains**: Remember that all four domain aliases point to the same content
