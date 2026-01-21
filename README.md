@@ -35,13 +35,17 @@ The website is hosted on:
 
 ### Deploy to AWS
 
+Use the **"Deploy to AWS"** GitHub Action (manual trigger) or run locally:
+
 ```bash
 # Sync to S3
 aws s3 sync docs/ s3://www.eclipticalsoftware.com/
 
 # Invalidate CloudFront cache
-aws cloudfront create-invalidation --distribution-id E3GL3C9TLDW9XN --paths "/*"
+aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 ```
+
+The GitHub Action uses OIDC federation for secure, secretless authentication with AWS.
 
 ## 📧 Contact
 
@@ -49,5 +53,7 @@ aws cloudfront create-invalidation --distribution-id E3GL3C9TLDW9XN --paths "/*"
 - **Book a Call**: [Calendly](https://calendly.com/ecliptical/30min)
 
 ## 📄 License
+
+This project is proprietary software. See [LICENSE](LICENSE) for details.
 
 © 2005 - 2026 Ecliptical Software Inc. All rights reserved.

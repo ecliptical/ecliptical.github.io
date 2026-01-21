@@ -18,9 +18,8 @@ This repository contains the official company website for **Ecliptical Software 
 ## AWS Infrastructure
 
 ### CloudFront Distribution
-- **Distribution ID**: E3GL3C9TLDW9XN
-- **CloudFront Domain**: d1eydgl8kp3bbn.cloudfront.net
 - **Status**: Deployed
+- **Distribution ID**: Stored as GitHub secret `CLOUDFRONT_DISTRIBUTION_ID`
 - **Aliases**:
   - eclipticalsoftware.com
   - www.eclipticalsoftware.com
@@ -30,18 +29,21 @@ This repository contains the official company website for **Ecliptical Software 
 ### S3 Bucket
 - **Bucket Name**: www.eclipticalsoftware.com
 - **Region**: ca-central-1 (Canada/Montreal)
-- **Origin**: www.eclipticalsoftware.com.s3.amazonaws.com
 - **Configuration**: Static website hosting via CloudFront (not direct S3 website hosting)
 
 ## Repository Structure
 ```
 /
+├── .github/
+│   └── workflows/
+│       └── deploy-aws.yml  # GitHub Action for AWS deployment
 ├── docs/                   # Public website assets (GitHub Pages root)
 │   ├── index.html          # Main landing page
 │   ├── ecliptical-md.png   # Company logo (180x180)
 │   ├── favicon.ico         # Site favicon
 │   └── designrush-new-logo.svg # DesignRush partner logo
 ├── AGENTS.md               # This file
+├── LICENSE                 # Proprietary license
 └── README.md               # Repository documentation
 ```
 
@@ -60,14 +62,16 @@ To deploy changes to the website:
 
 1. **Update local files** in this repository
 2. **Push to GitHub** - The site is immediately available at https://ecliptical.github.io via GitHub Pages
-3. **Sync to S3 bucket**:
+3. **Deploy to AWS** - Use the "Deploy to AWS" GitHub Action (manual trigger) or run locally:
    ```bash
    aws s3 sync docs/ s3://www.eclipticalsoftware.com/
+   aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
    ```
-4. **Invalidate CloudFront cache**:
-   ```bash
-   aws cloudfront create-invalidation --distribution-id E3GL3C9TLDW9XN --paths "/*"
-   ```
+
+### GitHub Actions
+- **Deploy to AWS** (`deploy-aws.yml`): Manual workflow for deploying to S3 and invalidating CloudFront cache
+  - Uses OIDC federation for secure, secretless AWS authentication
+  - Repository secrets: `AWS_ROLE_ARN`, `CLOUDFRONT_DISTRIBUTION_ID`
 
 ### Design Principles
 - Dark theme by default (`data-bs-theme="dark"`)
