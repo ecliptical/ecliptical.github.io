@@ -87,6 +87,22 @@
       transform: translateY(-5px);
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     }
+
+    .social-link {
+      transition: color 0.2s ease-in-out;
+    }
+
+    .social-link:hover,
+    .social-link:focus {
+      color: var(--bs-link-color) !important;
+      outline: none;
+    }
+
+    .social-link:focus-visible {
+      outline: 2px solid var(--bs-link-color);
+      outline-offset: 2px;
+      border-radius: 0.25rem;
+    }
   </style>
 </head>
 
@@ -154,9 +170,9 @@
       </div>
 
       <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-        <li class="ms-3"><a class="text-muted" href="https://github.com/ecliptical"><i class="bi-github" role="img" aria-label="GitHub"></i></a></li>
-        <li class="ms-3"><a class="text-muted" href="https://linkedin.com/company/ecliptical"><i class="bi-linkedin" role="img" aria-label="LinkedIn"></i></a></li>
-        <li class="ms-3"><a class="text-muted" href="https://x.com/ecliptical"><i class="bi-twitter-x" role="img" aria-label="X"></i></a></li>
+        <li class="ms-3"><a class="text-muted social-link" href="https://github.com/ecliptical"><i class="bi-github" role="img" aria-label="GitHub"></i></a></li>
+        <li class="ms-3"><a class="text-muted social-link" href="https://linkedin.com/company/ecliptical"><i class="bi-linkedin" role="img" aria-label="LinkedIn"></i></a></li>
+        <li class="ms-3"><a class="text-muted social-link" href="https://x.com/ecliptical"><i class="bi-twitter-x" role="img" aria-label="X"></i></a></li>
       </ul>
     </footer>
   </div>
