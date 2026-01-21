@@ -44,11 +44,12 @@ This repository contains the official company website for **Ecliptical Software 
 ```
 
 ## Technology Stack
-- **Frontend**: Bootstrap 5.3.0-alpha1 (Dark theme)
-- **Icons**: Bootstrap Icons 1.10.2
-- **Hosting**: AWS S3 + CloudFront
+- **Frontend**: Bootstrap 5.3.3 (Dark theme)
+- **Icons**: Bootstrap Icons 1.11.3
+- **Hosting**: AWS S3 + CloudFront + GitHub Pages
 - **CDN**: CloudFront (for global distribution)
 - **DNS**: Both domains resolve to the same CloudFront distribution
+- **SEO**: Open Graph meta tags, JSON-LD structured data
 
 ## Development Guidelines
 
@@ -56,11 +57,12 @@ This repository contains the official company website for **Ecliptical Software 
 To deploy changes to the website:
 
 1. **Update local files** in this repository
-2. **Sync to S3 bucket**:
+2. **Push to GitHub** - The site is immediately available at https://ecliptical.github.io via GitHub Pages
+3. **Sync to S3 bucket**:
    ```bash
    aws s3 sync . s3://www.eclipticalsoftware.com/ --exclude ".git/*" --exclude "AGENTS.md"
    ```
-3. **Invalidate CloudFront cache**:
+4. **Invalidate CloudFront cache**:
    ```bash
    aws cloudfront create-invalidation --distribution-id E3GL3C9TLDW9XN --paths "/*"
    ```
@@ -74,11 +76,14 @@ To deploy changes to the website:
 
 ### Key Features
 - Responsive 3-column layout for service offerings
-- Bootstrap dark theme styling
+- Bootstrap dark theme styling with smooth scrolling
 - Icon-based visual design using Bootstrap Icons
 - Links to external resources (Rust, Kubernetes, CNCF landscape)
 - DesignRush profile integration
-- Direct contact options (email and booking)
+- Prominent CTA buttons (Email Us, Book a Call)
+- Social links (GitHub, LinkedIn, X) with accessible focus states
+- Open Graph tags for social media sharing
+- JSON-LD structured data for SEO
 
 ## Working with AI Agents
 When collaborating with AI agents on this website:
@@ -90,7 +95,8 @@ When collaborating with AI agents on this website:
 5. **Domains**: Remember that all four domain aliases point to the same content
 
 ## Notes
-- The website uses CDN-hosted Bootstrap and Bootstrap Icons for performance
+- The website uses CDN-hosted Bootstrap and Bootstrap Icons for performance (with preconnect hints)
 - Canonical URL is set to https://www.eclipticalsoftware.com/
 - The S3 bucket is not configured for direct website hosting; CloudFront handles all requests
 - Apple touch icon and favicon are configured for mobile/browser compatibility
+- GitHub Pages provides an alternative access point at https://ecliptical.github.io (updates immediately on push)
